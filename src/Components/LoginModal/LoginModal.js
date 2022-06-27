@@ -13,6 +13,10 @@ function LoginModal({ users, toggleIsLoggedIn, toggleModal, isOpen }) {
   function userValidation(email, password) {
     let emailFound = false;
     let pwdMatches = false;
+
+    setIsEmailErrShown(false);
+    setIsPwdErrShow(false);
+
     users.forEach((user) => {
       if (user.email === email.toLowerCase()) {
         emailFound = true;
@@ -21,10 +25,6 @@ function LoginModal({ users, toggleIsLoggedIn, toggleModal, isOpen }) {
         }
       }
     });
-    if (emailFound & pwdMatches) {
-      toggleIsLoggedIn();
-      toggleModal();
-    }
 
     if (!emailFound) {
       setIsEmailErrShown(true);
@@ -32,6 +32,9 @@ function LoginModal({ users, toggleIsLoggedIn, toggleModal, isOpen }) {
     } else if (!pwdMatches) {
       setIsEmailErrShown(false);
       setIsPwdErrShow(true);
+    } else {
+      toggleIsLoggedIn();
+      toggleModal();
     }
   }
 
