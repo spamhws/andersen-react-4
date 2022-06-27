@@ -1,0 +1,11 @@
+.error404 {
+  font-size: 40px;
+  text-align: center;
+  padding: 40px;
+}
+
+.error404 span {
+  font-size: 200px;
+  font-style: oblique;
+  font-family: 'Snell Roundhand Cursive';
+}

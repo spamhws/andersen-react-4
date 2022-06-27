@@ -1,0 +1,84 @@
+.loginModal {
+  position: fixed;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  background-color: aliceblue;
+  padding: 40px;
+  border-radius: 16px;
+  font-size: 20px;
+}
+
+.loginModal button {
+  height: 44px;
+  width: 100px;
+  border-radius: 12px;
+
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+label h4 {
+  margin: 0px 0px 8px;
+}
+
+label p {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0px auto 0px;
+  opacity: 0;
+}
+
+.emailErr,
+.pwdErr {
+  opacity: 1;
+}
+
+label input {
+  width: calc(100% - 8px);
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 4px;
+}
+
+.loginModal .cancelBtn {
+  margin-right: 16px;
+  margin-top: 12px;
+  background-color: rgb(255, 128, 128);
+}
+
+.loginModal .cancelBtn:hover {
+  background-color: rgb(224, 113, 113);
+}
+
+.loginModal .loginBtn {
+  background-color: rgb(132, 255, 116);
+}
+
+.loginModal .loginBtn:hover {
+  background-color: rgb(113, 218, 99);
+}
+
+.loginOverlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.7);
+}

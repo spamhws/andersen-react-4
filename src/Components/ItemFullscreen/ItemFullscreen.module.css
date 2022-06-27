@@ -1,0 +1,44 @@
+.itemFullscreen {
+  display: flex;
+  max-width: 1200px;
+  padding: 16px;
+  margin: auto;
+  gap: 32px;
+}
+
+.itemFullscreen img {
+  border-radius: 8px;
+}
+
+.itemFullscreen h3 {
+  flex-grow: 1;
+}
+
+.itemFullscreen button {
+  width: 100%;
+  height: 32px;
+  background-color: coral;
+  border: 1px solid grey;
+  border-radius: 8px;
+}
+
+.itemFullscreen button:hover {
+  background-color: rgb(240, 108, 60);
+}
+
+.cartButton {
+  display: flex;
+  gap: 16px;
+}
+.cartButton input {
+  border-radius: 8px;
+  width: 32px;
+}
+
+button.disabled {
+  background-color: rgb(230, 230, 230);
+}
+
+button.disabled:hover {
+  background-color: rgb(230, 230, 230);
+}

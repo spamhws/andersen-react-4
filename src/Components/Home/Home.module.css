@@ -1,0 +1,10 @@
+.itemsGrid {
+  display: flex;
+  max-width: 1200px;
+  justify-content: center;
+  margin: auto;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 32px;
+  margin-bottom: 60px;
+}

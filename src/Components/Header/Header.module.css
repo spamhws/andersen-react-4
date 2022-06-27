@@ -1,0 +1,29 @@
+.header {
+  height: 60px;
+  width: 100wh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  font-size: 20px;
+  padding: 0 48px;
+}
+
+.header a:hover {
+  color: darkorange;
+}
+
+.header button {
+  height: 44px;
+  width: 100px;
+  border-radius: 12px;
+  margin-left: auto;
+  background-color: #8ce2ff;
+
+  font-size: 18px;
+}
+
+.header button:hover {
+  background-color: #6ebbd4;
+}
