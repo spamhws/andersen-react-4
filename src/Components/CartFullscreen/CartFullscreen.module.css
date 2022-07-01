@@ -1,0 +1,78 @@
+.cartFullscreen {
+  max-width: 90%;
+  margin: 60px auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.removeBtn {
+  background-color: transparent;
+  border: none;
+}
+
+table {
+  font-size: 22px;
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+thead {
+  background-color: #24c386;
+  color: white;
+}
+
+tr {
+  height: 48px;
+}
+
+.idCol {
+  width: 60px;
+  text-align: center;
+}
+
+.prodCol {
+  width: 320px;
+  text-align: left;
+}
+
+.priceCol {
+  width: 160px;
+  text-align: center;
+}
+.removeCol {
+  width: 60px;
+  text-align: left;
+}
+
+.removeCol button {
+  font-size: 24px;
+}
+
+.cartFooter {
+  margin-top: 32px;
+  align-self: flex-end;
+  display: flex;
+  gap: 32px;
+}
+
+.cartFooter button {
+  height: 60px;
+  width: 120px;
+  border-radius: 12px;
+
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.emptyBtn {
+  background-color: rgb(255, 128, 128);
+}
+
+.emptyBtn:hover {
+  background-color: rgb(224, 113, 113);
+}
+
+.payBtn {
+  background-color: rgb(163, 255, 151);
+}

@@ -1,42 +1,56 @@
 import React from 'react';
 import styles from './ItemFullscreen.module.css';
-import { useRef } from 'react';
+import LoadingMessage from '../LoadingMessage/LoadingMessage';
+import { useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItemToCart } from '../../Store/Actions/cartActions';
+import CartMin from '../CartMin/CartMin';
 
-function ItemFullscreen({ isLoggedIn, addItemToCart }) {
-  const amountRef = useRef(null);
-  let product = useLocation().state;
-  let buttonText = isLoggedIn ? 'Add to Cart' : 'Log in to use the cart';
+function ItemFullscreen() {
+  const isLoggedInX = useSelector((state) => state.isLoggedInX);
+  const dataX = useSelector((state) => state.loadData);
+  const location = useLocation();
+  const ID = location.state;
+  const [fieldValue, setFieldValue] = useState(1);
+  const dispatch = useDispatch();
 
-  const onClick = (e) => {
-    e.preventDefault();
-    if (isLoggedIn) {
-      addItemToCart(product.id, product.price, amountRef.current.value);
-    }
-  };
+  if (dataX === null) {
+    return <LoadingMessage />;
+  } else {
+    const buttonText = isLoggedInX ? 'Add to Cart' : 'Log in to use the cart';
+    const product = dataX.filter((product) => product.id === ID)[0];
 
-  return (
-    <div className={styles.itemFullscreen}>
-      <img src={product.images[0]} alt='product_image' />
-      <div>
-        <h3>{product.title}</h3>
-        <p>{product.description}</p>
-        <p>${product.price}</p>
-        <div className={styles.cartButton}>
-          <input type='number' defaultValue='1' ref={amountRef} />
-          <button
-            className={isLoggedIn ? '' : styles.disabled}
-            onClick={(e) => {
-              onClick(e);
-            }}
-          >
-            {buttonText}
-          </button>
+    const handleChange = (event) => {
+      setFieldValue(event.target.value);
+    };
+
+    const onClick = (event) => {
+      event.preventDefault();
+      if (isLoggedInX) {
+        dispatch(addItemToCart({ ...product, amount: Number(fieldValue) }));
+      }
+    };
+
+    return (
+      <div className={styles.itemFullscreen}>
+        <img src={product.images[0]} alt='product_image' />
+        <div>
+          <h3>{product.title}</h3>
+          <p>{product.description}</p>
+          <p>${product.price}</p>
+          <div className={styles.cartButton}>
+            <input type='number' defaultValue='1' onChange={handleChange} />
+            <button className={isLoggedInX ? '' : styles.disabled} onClick={onClick}>
+              {buttonText}
+            </button>
+          </div>
         </div>
+        <CartMin />
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default ItemFullscreen;

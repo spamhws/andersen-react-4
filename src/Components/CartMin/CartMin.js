@@ -1,8 +1,11 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styles from './CartMin.module.css';
 
-function CartMin({ isLoggedIn, cart }) {
-  if (!isLoggedIn) return null;
+function CartMin() {
+  const isLoggedInX = useSelector((state) => state.isLoggedInX);
+  const cart = useSelector((state) => state.cart);
+  if (!isLoggedInX) return null;
 
   let amount = 0,
     sum = 0;
@@ -13,11 +16,11 @@ function CartMin({ isLoggedIn, cart }) {
   });
 
   return (
-    <div className={styles.cartMin}>
+    <Link to={`/cart`} className={styles.cartMin}>
       <p>
         {amount} items in the cart. Total: ${sum}
       </p>
-    </div>
+    </Link>
   );
 }
 

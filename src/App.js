@@ -1,81 +1,35 @@
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { getData, getUser } from './utils/API';
+import { useDispatch } from 'react-redux';
 
-import CartMin from './Components/CartMin/CartMin';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import About from './Components/About/About';
 import ItemFullscreen from './Components/ItemFullscreen/ItemFullscreen';
 import RouteError from './Components/RouteError/RouteError';
+import CartFullscreen from './Components/CartFullscreen/CartFullscreen';
 
 function App() {
-  const [data, setData] = useState(null);
-  const [cart, setCart] = useState({ items: [] });
-  const [users, setUsers] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  function toggleIsLoggedIn() {
-    setIsLoggedIn(!isLoggedIn);
-  }
-
-  function addItemToCart(itemID, price, amount = 1) {
-    let itemAlreadyAdded = false;
-    cart.items.forEach((item, index) => {
-      if (item.productID === itemID) {
-        const newCart = [...cart.items];
-
-        newCart[index].amount += Number(amount);
-        setCart({ items: newCart });
-
-        itemAlreadyAdded = true;
-      }
-    });
-
-    if (!itemAlreadyAdded) {
-      setCart((prevState) => ({
-        items: [...prevState.items, { productID: itemID, price: price, amount: Number(amount) }],
-      }));
-    }
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(`https://api.escuelajs.co/api/v1/products?offset=12&limit=12`);
-      if (!response.ok) {
-        throw new Error(`This is an HTTP error: The status is ${response.status}`);
-      }
-      let actualData = await response.json();
-      setData(actualData);
-    };
-
-    const getUser = async () => {
-      const response = await fetch(`https://api.escuelajs.co/api/v1/users/`);
-      if (!response.ok) {
-        throw new Error(`This is an HTTP error: The status is ${response.status}`);
-      }
-      let actualUser = await response.json();
-      setUsers(actualUser);
-    };
-
-    getData();
-    getUser();
+    dispatch(getData());
+    dispatch(getUser());
   }, []);
 
   return (
     <>
-      <Header toggleIsLoggedIn={toggleIsLoggedIn} users={users} isLoggedIn={isLoggedIn} />
+      <Header />
       <Routes>
-        <Route path='/' element={<Home data={data} addItemToCart={addItemToCart} isLoggedIn={isLoggedIn} />} />
+        <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route
-          path='/product/:id'
-          element={<ItemFullscreen data={data} addItemToCart={addItemToCart} isLoggedIn={isLoggedIn} />}
-        />
+        <Route path='/product/:id' element={<ItemFullscreen />} />
         <Route path='*' element={<RouteError />} />
+        <Route path='/cart' element={<CartFullscreen />} />
       </Routes>
-      <CartMin cart={cart} isLoggedIn={isLoggedIn} />
     </>
   );
 }

@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toggleIsLoggedInX } from '../../Store/Actions/toggleIsLoggedIn';
 import LoginModal from '../LoginModal/LoginModal';
 import styles from './Header.module.css';
 
-function Header({ isLoggedIn, toggleIsLoggedIn, users }) {
+function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  let buttonText = isLoggedIn ? 'Log out' : 'Log in';
+  const isLoggedInX = useSelector((state) => state.isLoggedInX);
+
+  const dispatch = useDispatch();
+
+  let buttonText = isLoggedInX ? 'Log out' : 'Log in';
 
   function toggleModal() {
     setIsModalOpen(!isModalOpen);
   }
 
   function onClick() {
-    if (isLoggedIn) {
-      toggleIsLoggedIn();
+    // if (isLoggedInX) {
+    if (isLoggedInX) {
+      dispatch(toggleIsLoggedInX());
     } else {
       toggleModal();
     }
@@ -31,7 +38,7 @@ function Header({ isLoggedIn, toggleIsLoggedIn, users }) {
       >
         {buttonText}
       </button>
-      <LoginModal isOpen={isModalOpen} toggleModal={toggleModal} toggleIsLoggedIn={toggleIsLoggedIn} users={users} />
+      <LoginModal isOpen={isModalOpen} toggleModal={toggleModal} />
     </div>
   );
 }
